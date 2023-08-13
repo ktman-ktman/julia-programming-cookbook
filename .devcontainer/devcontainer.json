@@ -1,0 +1,43 @@
+{
+    "name": "julia-programming-cookbook",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".",
+        "args": {
+            "VARIANT": "1.9.1-bookworm",
+            "USERNAME": "vscode",
+            "USE_UID": "1000",
+            "USE_GID": "1000",
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash",
+                        "args": [
+                            "-l"
+                        ]
+                    }
+                }
+            },
+            "extensions": [
+                "julialang.language-julia",
+                "VisualStudioExptTeam.vscodeintellicode",
+            ],
+        },
+    },
+    "containerEnv": {
+        "JULIA_PATH": "/usr/local/julia",
+        "JULIA_NUM_THREADS": "4",
+        "JULIA_PROJECT": "${containerWorkspaceFolder}",
+        "JULIA_DEPOT_PATH": "${containerWorkspaceFolder}/.julia",
+    },
+    // "runArgs": [
+    //     "--env-file",
+    //     ".devcontainer/devcontainer.env",
+    // ],
+    "remoteUser": "vscode",
+    "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+}
