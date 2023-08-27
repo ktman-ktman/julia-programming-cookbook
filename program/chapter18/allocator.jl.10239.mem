@@ -1,0 +1,11 @@
+        - function allocator(n)
+      896     zeros(n)
+    80048     zeros(n, n)
+  8000064     zeros(n, n, n)
+        - end
+        - 
+        - using Profile
+        - 
+        - allocator(1)
+        - Profile.clear_malloc_data()
+        - allocator(100)
